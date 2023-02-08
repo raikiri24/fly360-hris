@@ -9,6 +9,21 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+
+*{
+  margin:0;
+  padding:0;
   font-family: Noir, system-ui, sans-serif;
+}
+
+.icon path{
+  stroke: #fff;  
+}
+
+.dropdown-toggle::after {
+  display: none !important; 
+}
+
+.__notification {
+
 }
