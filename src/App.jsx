@@ -3,13 +3,18 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/Login/Login';
 import Navigation from './components/Navigation/Navigation';
 import Whatsnew from './components/WhatsNew/Whatsnew';
-Whatsnew;
+import SideBar from './components/SideBar/SideBar';
+
 function App() {
   return (
-    <div className="App bg-[#F5F5F5]">
+    <div className="App bg-[#EEEEEE]">
       {/* <Login /> */}
+
       <Navigation />
-      <Whatsnew />
+      <div className="relative">
+        <SideBar />
+        <Whatsnew />
+      </div>
     </div>
   );
 }

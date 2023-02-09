@@ -1,7 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { BsEmojiFrown, BsEmojiSmile, BsEmojiLaughing } from 'react-icons/bs';
 import { IconContext } from 'react-icons';
-
+import { AiOutlineClose } from 'react-icons/ai';
 const Survey = () => {
   const [hidden, setHidden] = useState(true);
   const [hideSurvey, setHideSurvey] = useState(false);
@@ -17,42 +17,18 @@ const Survey = () => {
   return (
     <div
       className={
-        'survey flex place-items-center gap-8 justify-center mt-6 py-3 max-xl:flex-col ' +
+        'survey flex place-items-center gap-8 justify-center mt-6 py-3 flex-col border-b-2 relative ' +
         (hideSurvey ? 'hidden' : 'block')
       }>
-      <span className="text-xl">Hi! How is your health today?</span>
-      <ul className="list-none  flex gap-6">
-        <li>
-          <IconContext.Provider value={{ color: 'green', size: '60px' }}>
-            <div
-              className="flex place-items-center gap-3 cursor-pointer px-8  hover:border-2"
-              onClick={() => setHidden(false)}>
-              <BsEmojiLaughing />
-              <span>Excellent</span>
-            </div>
-          </IconContext.Provider>
-        </li>
-        <li>
-          <IconContext.Provider value={{ color: 'yellow', size: '60px' }}>
-            <div
-              className="flex  place-items-center gap-3 cursor-pointer px-8  hover:border-2"
-              onClick={() => setHidden(false)}>
-              <BsEmojiSmile />
-              <span>Good</span>
-            </div>
-          </IconContext.Provider>
-        </li>
-        <li>
-          <IconContext.Provider value={{ color: 'red', size: '60px' }}>
-            <div
-              className="flex  place-items-center gap-3 cursor-pointer px-8  hover:border-2"
-              onClick={() => setHidden(false)}>
-              <BsEmojiFrown onClick={() => setHidden(false)} />
-              <span>Poor</span>
-            </div>
-          </IconContext.Provider>
-        </li>
-      </ul>
+      <div className="absolute top-0 right-0">
+        <IconContext.Provider value={{ color: 'black', size: '16px' }}>
+          <div
+            className="flex place-items-center gap-3 cursor-pointer px-8"
+            onClick={() => setHideSurvey(true)}>
+            <AiOutlineClose />
+          </div>
+        </IconContext.Provider>
+      </div>
       <div
         className={
           'items-center bg-green-500 text-white text-sm font-bold px-4 py-3 ' +
@@ -67,6 +43,39 @@ const Survey = () => {
         </svg>
         <p>Feedback Submitted.</p>
       </div>
+      <span className="text-xl">Hi! How is your health today?</span>
+      <ul className="list-none  flex gap-6">
+        <li>
+          <IconContext.Provider value={{ color: 'green', size: '45px' }}>
+            <div
+              className="flex place-items-center gap-3 cursor-pointer px-8  hover:border-2"
+              onClick={() => setHidden(false)}>
+              <BsEmojiLaughing />
+              <span>Excellent</span>
+            </div>
+          </IconContext.Provider>
+        </li>
+        <li>
+          <IconContext.Provider value={{ color: 'yellow', size: '45px' }}>
+            <div
+              className="flex  place-items-center gap-3 cursor-pointer px-8  hover:border-2"
+              onClick={() => setHidden(false)}>
+              <BsEmojiSmile />
+              <span>Good</span>
+            </div>
+          </IconContext.Provider>
+        </li>
+        <li>
+          <IconContext.Provider value={{ color: 'red', size: '45px' }}>
+            <div
+              className="flex  place-items-center gap-3 cursor-pointer px-8  hover:border-2"
+              onClick={() => setHidden(false)}>
+              <BsEmojiFrown onClick={() => setHidden(false)} />
+              <span>Poor</span>
+            </div>
+          </IconContext.Provider>
+        </li>
+      </ul>
     </div>
   );
 };

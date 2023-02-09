@@ -10,7 +10,7 @@ const Announcement = () => {
   const [datePosted, setDatePosted] = useState('Feb 7 20:24');
   const [hideAnnouncement, setHideAnnouncement] = useState(true);
   return (
-    <div>
+    <div className="border-b-2">
       <div className="flex gap-3 justify-center my-4 text-white">
         <div className=" h-48 w-32 border-4 rounded-lg bg-emerald-700 relative cursor-pointer">
           <div className="absolute bottom-0 w-full text-center pb-4 pt-4 bg-sky-700 bg-opacity-30 rounded-md">
@@ -33,45 +33,16 @@ const Announcement = () => {
           </div>
         </div>
         <div
-          className=" h-48 w-32 border-4 rounded-lg bg-emerald-700  relative cursor-pointer"
+          className=" h-48 w-32 border-4 rounded-lg bg-emerald-700  relative cursor-pointer "
           onClick={() => {
             setName('Human Resource');
             setHideAnnouncement(false);
           }}>
-          <div className="absolute bottom-0 w-full text-center py-2 bg-sky-700 bg-opacity-40 rounded-md">
+          <div className="absolute bottom-0 w-full text-center py-2 bg-sky-700 bg-opacity-40 rounded-md ">
             <span>IT</span>
           </div>
         </div>
-        <div
-          className=" h-48 w-32 border-4 rounded-lg bg-emerald-700 relative max-lg:hidden cursor-pointer"
-          onClick={() => {
-            setName('Human Resource');
-            setHideAnnouncement(false);
-          }}>
-          <div className="absolute bottom-0 w-full text-center py-2 bg-sky-700 bg-opacity-40 rounded-md">
-            <span>Finance</span>
-          </div>
-        </div>
-        <div
-          className=" h-48 w-32 border-4 rounded-lg bg-emerald-700 relative max-lg:hidden cursor-pointer"
-          onClick={() => {
-            setName('Human Resource');
-            setHideAnnouncement(false);
-          }}>
-          <div className="absolute bottom-0 w-full text-center py-2 bg-sky-700 bg-opacity-40 rounded-md">
-            <span>Accounting</span>
-          </div>
-        </div>
-        <div
-          className=" h-48 w-32  border-4 rounded-lg bg-emerald-700 relative max-xl:hidden cursor-pointer"
-          onClick={() => {
-            setName('Human Resource');
-            setHideAnnouncement(false);
-          }}>
-          <div className="absolute bottom-0 w-full text-center py-2 bg-sky-700 bg-opacity-40 rounded-md">
-            <span>Admin</span>
-          </div>
-        </div>
+
         <div
           className=" h-48 w-32 border-4 rounded-lg bg-emerald-700 relative max-2xl:hidden cursor-pointer"
           onClick={() => {
@@ -91,8 +62,7 @@ const Announcement = () => {
           </IconContext.Provider>
         </div>
       </div>
-      <div
-        className={'text-white flex w-full justify-center' + hideAnnouncement ? 'hidden' : 'block'}>
+      <div className={hideAnnouncement ? 'hidden' : 'block text-white w-full justify-center'}>
         <div className=" h-[800px] w-full border-4 rounded-lg bg-emerald-700 relative ">
           <img src={HR} alt="" className="h-full w-full " />
           <div className="absolute top-0 w-full text-left py-2 px-8 bg-zinc-500 bg-opacity-40 flex justify-between rounded-md">

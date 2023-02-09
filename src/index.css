@@ -1,6 +1,6 @@
 @font-face {
   font-family: Noir;
-  src: url(../src/assets/font/Noir_regular.otf);
+  src: url(../src/assets/font/Noir.ttf);
 }
 
 @config "../tailwind.config.cjs";
