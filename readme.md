@@ -1,6 +1,6 @@
 # Welcome to FLY 360!
 
-> **ANNOUNCEMENT**
+> **Note**
 > GOALS AND VISIONS ARE STILL A WORK IN PROGRESS.
 
 
@@ -14,11 +14,15 @@
 
 ## Rename a file
 
-Be vigilant whenever renaming a file. You may encounter problem that may cause error on your development. 
+> **Note**
+> Be vigilant whenever renaming a file. You may encounter problem that may cause error on your development. 
 
 ## Delete a file
 
-Be mindful not to delete any files in this project.
+> **Note**
+> Be mindful not to delete any files in this project.
+
+
 
 ## Commands to be used
 
