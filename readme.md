@@ -32,7 +32,7 @@
 |Cloning the repository|`git clone <repository_url>`            |
 |Changing Directory          |`"cd <directory_location>`            |
 |Installing Dependencies       |`npm install or npm i`|
-|Installing Dependencies       |`npm install or npm i`|
+|Starting a project     |`npm run dev >> http:localhost:5173 `|
 
 
 
