@@ -36,13 +36,22 @@
 
 
 
-
 ## Chart for Branching in the Repository:
 
+  
+
 ```mermaid
+
 graph LR
-A[main branch] -- create new branch --> B(Neil = New Branch Name)
-A -- create new branch --> C(Kae = New Branch Name)
-B -- push code --> D[main branch]
-C -- push code --> D
-```
+
+A[main branch] -- create new branch --> B(New Branch Name)
+
+B -- push code --> D[code review]
+
+D --> E[FAILED]
+
+E --> B
+
+D --> G[PASSED]
+
+G --> H[Main Branch / Deployed]
