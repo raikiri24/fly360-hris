@@ -16,7 +16,11 @@ const Footer = () => {
               <div className="flex justify-center items-center gap-5">
                 <span>Stay Connected</span>
                 <div>
-                  <input type="text" placeholder="Email Address" className="px-4 py-2 rounded-lg" />
+                  <input
+                    type="text"
+                    placeholder="Email Address"
+                    className="px-4 py-2 rounded-lg text-black outline-none"
+                  />
                   <button className="px-4 py-2 bg-[#012D2D] -mx-5 rounded-tr-lg rounded-br-lg">
                     Sign-up
                   </button>
