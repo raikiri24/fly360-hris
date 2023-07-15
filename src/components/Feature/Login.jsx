@@ -25,10 +25,17 @@ function Login() {
             </div>
             <TextInput id="password1" required type="password" />
           </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="remember" />
-            <Label htmlFor="remember">Remember me</Label>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Checkbox id="remember" />
+              <Label htmlFor="remember">Remember me</Label>
+            </div>
+            <div className="flex-grow"></div>
+            <a href="/" className="text-teal-700 text-sm">
+              Forgot Password
+            </a>
           </div>
+
           <Button type="submit" className="bg-teal-500 hover:bg-blue-700 text-white">
             Sign In
           </Button>
