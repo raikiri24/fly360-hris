@@ -3,6 +3,7 @@ import { IoMdNotifications } from 'react-icons/io';
 import { RxAvatar } from 'react-icons/rx';
 import { HiSwitchHorizontal } from 'react-icons/hi';
 import { BiLogOut } from 'react-icons/bi';
+import { VscSettings } from 'react-icons/vsc';
 import Logo from '../../assets/nav-icon-home.svg';
 import { motion } from 'framer-motion';
 
@@ -70,7 +71,11 @@ const Navigation = () => {
                     </div>
                   )}
 
-                  <li className="px-2 py-2 hover:bg-gray-700 hover:text-white flex items-center gap-2 text-amber-700 cursor-pointer">
+                  <li className="px-2 py-2 hover:bg-gray-200 flex items-center gap-2 text-teal-900 cursor-pointer">
+                    <VscSettings />
+                    Settings
+                  </li>
+                  <li className="px-2 py-2 hover:bg-gray-200  flex items-center gap-2 text-amber-700 cursor-pointer">
                     <BiLogOut />
                     Logout
                   </li>
