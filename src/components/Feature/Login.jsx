@@ -31,8 +31,8 @@ function Login() {
               <Label htmlFor="remember">Remember me</Label>
             </div>
             <div className="flex-grow"></div>
-            <a href="/" className="text-teal-700 text-sm">
-              Forgot Password
+            <a href="/" className="text-red-600 text-sm">
+              Forgot Password?
             </a>
           </div>
 
@@ -44,7 +44,7 @@ function Login() {
 
       <div className="bg-teal-500 w-1/2 flex justify-center items-center">
         <a href="/">
-          <img src={Logo1} alt="Large Logo" className="w-64 h-64" />
+          <img src={Logo1} alt="Large Logo" className="w-96 h-96" />
         </a>
       </div>
     </div>
