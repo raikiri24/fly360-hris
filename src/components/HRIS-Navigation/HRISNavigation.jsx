@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsShieldLockFill } from 'react-icons/bs';
 
-const HRISNavigation = () => {
+function HRISNavigation() {
   return (
     <div className="mt-20 font-custom">
       <div className="grid grid-cols-9 gap-4 px-10">
@@ -80,6 +80,6 @@ const HRISNavigation = () => {
       </div>
     </div>
   );
-};
+}
 
 export default HRISNavigation;
