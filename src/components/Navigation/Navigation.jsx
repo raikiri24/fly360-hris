@@ -16,6 +16,13 @@ const Navigation = () => {
         <div className="text-white text-lg">
           <img src={Logo} alt="" className="h-12" />
         </div>
+        <div>
+          <ul className="flex gap-10 text-white text-lg">
+            <a href="/login">
+              <button className="hover:text-[#00A59B]">Login</button>
+            </a>
+          </ul>
+        </div>
 
         <div className="flex gap-10 items-center">
           <motion.button
