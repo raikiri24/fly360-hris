@@ -4,15 +4,16 @@ import { FaLocationDot } from 'react-icons/fa6';
 import { ImFacebook2 } from 'react-icons/im';
 import { TiSocialInstagram } from 'react-icons/ti';
 import { ImYoutube2 } from 'react-icons/im';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <div className="bg-[#088585] mt-10 text-white p-10 ">
       <div>
-        <div className="flex gap-20">
+        <div className="flex gap-10">
           <img src={Logo} alt="" className=" h-40" />
           <div className="flex flex-col">
-            <div className="flex gap-40">
+            <div className="grid grid-cols-3 gap-24">
               <div className="flex justify-center items-center gap-5">
                 <span>Stay Connected</span>
                 <div>
@@ -29,7 +30,9 @@ const Footer = () => {
               <div>
                 <span>Web Development</span>
                 <ul className="ml-20">
-                  <li>UI / UX Design</li>
+                  <li>
+                    <Link to="/ux"> UI / UX Design</Link>
+                  </li>
                   <li>Front-end Development</li>
                   <li>Back-end Development</li>
                   <li>API Integration</li>

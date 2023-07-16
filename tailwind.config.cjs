@@ -14,7 +14,8 @@ module.exports = {
         'c-b': "url('/src/assets/c-b.jpg')",
         't-d': "url('/src/assets/t-d.jpg')",
         'e-r': "url('/src/assets/e-r.jpg')",
-        'e-e': "url('/src/assets/e-e.jpg')"
+        'e-e': "url('/src/assets/e-e.jpg')",
+        'fly-404': "url('/src/assets/fly-404.png')"
       }
     }
   },
