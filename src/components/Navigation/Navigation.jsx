@@ -10,18 +10,12 @@ import { motion } from 'framer-motion';
 const Navigation = () => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const [accountsIsOpen, setAccountsIsOpen] = useState(false);
+  const [activeAccount, setActiveAccount] = useState(true);
   return (
     <nav className="font-custom bg-[#66A7A3] px-10 py-4 ">
       <div className="flex justify-between items-center">
         <div className="text-white text-lg">
           <img src={Logo} alt="" className="h-12" />
-        </div>
-        <div>
-          <ul className="flex gap-10 text-white text-lg">
-            <a href="/login">
-              <button className="hover:text-[#00A59B]">Login</button>
-            </a>
-          </ul>
         </div>
 
         <div className="flex gap-10 items-center">
@@ -63,17 +57,28 @@ const Navigation = () => {
                   </li>
                   {accountsIsOpen && (
                     <div>
-                      <li className="px-2 py-2 hover:bg-gray-700 hover:text-white flex ml-5 items-center gap-2 text-xs cursor-pointer">
+                      <li
+                        className={
+                          activeAccount
+                            ? 'bg-slate-700 text-white px-5 py-2 hover:bg-gray-700 hover:text-white flex  items-center gap-2 text-xs cursor-pointer '
+                            : 'px-5 py-2 hover:bg-gray-400 hover:text-white flex ml-5 items-center gap-2 text-xs cursor-pointer '
+                        }>
                         <span>
                           <RxAvatar />
                         </span>
-                        Paul Leandro Lanot
+                        Super Admin Mode
                       </li>
-                      <li className="px-2 py-2 hover:bg-gray-700 hover:text-white flex ml-5 items-center gap-2 text-xs cursor-pointer">
+                      <li className="px-5 py-2 hover:bg-gray-400 hover:text-white flex  items-center gap-2 text-xs cursor-pointer">
                         <span>
                           <RxAvatar />
                         </span>
-                        Paul Leandro Lanot
+                        Admin Mode
+                      </li>
+                      <li className="px-5 py-2 hover:bg-gray-400 hover:text-white flex items-center gap-2 text-xs cursor-pointer">
+                        <span>
+                          <RxAvatar />
+                        </span>
+                        Employee Mode
                       </li>
                     </div>
                   )}
