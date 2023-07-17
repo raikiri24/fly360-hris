@@ -1,19 +1,32 @@
 import { React } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navigation from './components/Navigation/Navigation';
-import HRISNavigation from './components/HRIS-Navigation/HRISNavigation';
-import Footer from './components/Footer/Footer';
+import HRISNav from './components/HRIS-Navigation/';
 import 'rsuite/dist/rsuite-no-reset.min.css';
+import Login from './components/Login/Login';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
     <div className="App ">
-      <Navigation />
       <Routes>
-        <Route path="/" element={<HRISNavigation />} />
+        <Route path="/" element={<HRISNav />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
-      <Footer />
     </div>
+  );
+}
+
+function ProtectedRoutes() {
+  return (
+    <>
+      <Navigation />
+      <HRISNavigation />
+      <div className="h-full">
+        <Routes>{/* <Route path="/" element={<Home />} /> */}</Routes>
+        <Footer />
+      </div>
+    </>
   );
 }
 
