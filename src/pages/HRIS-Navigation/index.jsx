@@ -1,9 +1,9 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 import HRISNavigation from './HRISNavigation';
-import Footer from '../Footer/Footer';
+import Footer from '../../components/Footer/Footer';
 
-const HRISNav = () => {
+const HRISPage = () => {
   return (
     <>
       <Navigation />
@@ -13,4 +13,4 @@ const HRISNav = () => {
   );
 };
 
-export default HRISNav;
+export default HRISPage;
