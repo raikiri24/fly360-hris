@@ -6,11 +6,13 @@ import { BiLogOut } from 'react-icons/bi';
 import { VscSettings } from 'react-icons/vsc';
 import Logo from '../../assets/nav-icon-home.svg';
 import { motion } from 'framer-motion';
+import { useLogin } from '../../context/LoginContext';
 
 const Navigation = () => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
   const [accountsIsOpen, setAccountsIsOpen] = useState(false);
   const [activeAccount, setActiveAccount] = useState(true);
+  const { handleLogout } = useLogin();
   return (
     <nav className="font-custom bg-[#66A7A3] px-10 py-4 ">
       <div className="flex justify-between items-center">
@@ -87,7 +89,9 @@ const Navigation = () => {
                     <VscSettings />
                     Settings
                   </li>
-                  <li className="px-2 py-2 hover:bg-gray-200  flex items-center gap-2 text-amber-700 cursor-pointer">
+                  <li
+                    className="px-2 py-2 hover:bg-gray-200  flex items-center gap-2 text-amber-700 cursor-pointer"
+                    onClick={() => handleLogout()}>
                     <BiLogOut />
                     Logout
                   </li>

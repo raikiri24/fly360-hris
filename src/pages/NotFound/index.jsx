@@ -1,8 +1,8 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
-import Footer from '../Footer/Footer';
+import Navigation from '../../components/Navigation/Navigation';
+import Footer from '../../components/Footer/Footer';
 
-const NotFound = () => {
+const NotFoundPage = () => {
   return (
     <div className="font-custom">
       <Navigation />
@@ -16,4 +16,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound;
+export default NotFoundPage;
