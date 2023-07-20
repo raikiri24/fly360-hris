@@ -123,7 +123,7 @@ function LoginProvider({ children }) {
       handleLogout();
       return;
     }
-  }, [cookie]);
+  }, []);
   const isAuthenticated = useCallback(
     (expiryDate = expiryToken) => {
       const isValid = new Date() <= expiryDate;
