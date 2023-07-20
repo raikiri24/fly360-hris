@@ -109,11 +109,16 @@ function LoginProvider({ children }) {
 
     if (cookie) {
       const decoded = jwt(cookie);
+
       if (new Date() <= new Date(decoded.exp * 1000)) {
         setUser(decoded);
+        setUserName(localStorage.getItem('user'));
+        setUserImg(localStorage.getItem('user_img'));
       } else {
         handleLogout();
       }
+    } else {
+      handleLogout();
     }
   }, []);
 
