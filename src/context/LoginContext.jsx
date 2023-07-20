@@ -10,8 +10,8 @@ import post from '../api/post';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { API_AUTH, TOKEN_KEY } from '../constants';
-import getCookie from '../util/cookie';
-import { clearCookies } from '../util/cookie';
+import jwt from 'jwt-decode';
+import Cookies from 'universal-cookie';
 
 const LoginContext = createContext();
 
@@ -45,14 +45,17 @@ function reducer(state, action) {
 }
 
 function LoginProvider({ children }) {
-  const [cookie, setCookie] = useState(getCookie(TOKEN_KEY));
+  const [userName, setUserName] = useState(localStorage.getItem('user'));
+  const [userImg, setUserImg] = useState(localStorage.getItem('user_img'));
+
+  const cookies = new Cookies();
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [expiryToken, setExpiry] = useState(null);
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    clearCookies();
-    setExpiry(null);
+    cookies.remove('jwt_authorization');
+    setUser(null);
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('user');
     localStorage.removeItem('user_img');
@@ -71,8 +74,13 @@ function LoginProvider({ children }) {
       if ([200].includes(resp.status)) {
         let { token, user, image } = resp.data;
 
-        document.cookie = `${TOKEN_KEY}=${token}`;
-        setCookie(token);
+        const decoded = jwt(token);
+        setUser(decoded);
+
+        cookies.set('jwt_authorization', token, {
+          expires: new Date(decoded.exp * 1000)
+        });
+
         toast.success(
           <p>
             Welcome <b>{user}!</b>
@@ -95,43 +103,19 @@ function LoginProvider({ children }) {
       dispatch({ type: 'ERROR' });
     }
   }, []);
-  const validateLogin = useCallback(() => {
-    const data = parseJwt(cookie);
-    let isValid = false;
-    let expiry = null;
-    let role = null;
-    console.log('validateLogin>>data', data);
-    if (data) {
-      expiry = new Date(new Date(data.exp * 1000));
-
-      if (new Date() <= expiry) {
-        isValid = true;
-        role = data?.role;
-        setExpiry(expiry);
-      }
-    }
-    console.log('validateLogin>>{ isValid, role }', { isValid, role });
-    return { isValid, role, expiry };
-  }, [cookie]);
 
   useEffect(() => {
-    const { isValid, expiry } = validateLogin();
+    const cookie = cookies.get('jwt_authorization');
 
-    if (isValid) {
-      setExpiry(expiry);
-    } else {
-      handleLogout();
-      return;
+    if (cookie) {
+      const decoded = jwt(cookie);
+      if (new Date() <= new Date(decoded.exp * 1000)) {
+        setUser(decoded);
+      } else {
+        handleLogout();
+      }
     }
   }, []);
-  const isAuthenticated = useCallback(
-    (expiryDate = expiryToken) => {
-      const isValid = new Date() <= expiryDate;
-
-      return isValid;
-    },
-    [expiryToken]
-  );
 
   return (
     <LoginContext.Provider
@@ -140,7 +124,9 @@ function LoginProvider({ children }) {
         dispatch,
         handleLogin,
         handleLogout,
-        isAuthenticated
+        user,
+        userName,
+        userImg
       }}>
       <Toaster />
       {children}

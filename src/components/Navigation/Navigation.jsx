@@ -11,17 +11,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  const { isAuthenticated } = useLogin();
-  const [user, setUser] = useState(null);
-  const [userImg, setUserImg] = useState(null);
-
-  useEffect(() => {
-    const usertmp = localStorage.getItem('user');
-    const userimg = localStorage.getItem('user_img');
-    setUser(usertmp);
-    setUserImg(userimg);
-    console.log('..');
-  }, []);
+  const { user, userName, userImg } = useLogin();
 
   return (
     <nav className="font-custom bg-[#66A7A3] px-10 py-4 ">
@@ -30,7 +20,7 @@ const Navigation = () => {
           <img src={Logo} alt="" className="h-12" />
         </div>
 
-        {isAuthenticated() && (
+        {user && (
           <div className="flex gap-10 items-center justify-center">
             <motion.button
               whileHover={{ scale: 1.0 }}
@@ -56,12 +46,14 @@ const Navigation = () => {
                   </div>
                 </div>
               </motion.button>
-              {dropdownIsOpen && <UserDropdown useLogin={useLogin} user={user} userImg={userImg} />}
+              {dropdownIsOpen && (
+                <UserDropdown useLogin={useLogin} user={userName} userImg={userImg} />
+              )}
             </div>
           </div>
         )}
 
-        {!isAuthenticated() && (
+        {!user && (
           <Link to="/login" className="text-white">
             Login
           </Link>

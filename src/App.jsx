@@ -12,6 +12,7 @@ function App() {
     <div className="App ">
       <LoginProvider>
         <Routes>
+          <Route path="/" element={<HRISPage />} />
           <Route path="/hrms" element={<HRISPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/login" element={<Login />} />
