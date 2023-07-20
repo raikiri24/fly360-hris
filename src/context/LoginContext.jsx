@@ -53,9 +53,9 @@ function LoginProvider({ children }) {
   const handleLogout = () => {
     clearCookies();
     setExpiry(null);
-    localStorage.setItem('isLoggedIn');
-    localStorage.setItem('user');
-    localStorage.setItem('user_img');
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user');
+    localStorage.removeItem('user_img');
     navigate('/login');
   };
   const redirectIn = (hash = '') => {
