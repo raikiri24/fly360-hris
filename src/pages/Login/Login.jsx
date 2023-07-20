@@ -1,10 +1,12 @@
 import React from 'react';
 import Logo1 from '../../assets/nav-icon-home.svg';
 import LoginForm from '../../components/Forms/LoginForm';
+import { HiChatBubbleLeftRight } from 'react-icons/hi2';
+import { motion } from 'framer-motion';
 
 const Login = () => {
   return (
-    <div>
+    <div className="relative">
       <div className="flex h-screen ">
         <div className="flex flex-col justify-center items-center bg-white w-1/2 max-lg:w-full ">
           <img
@@ -34,6 +36,14 @@ const Login = () => {
           </a>
         </div>
       </div>
+      <motion.button
+        whileHover={{ scale: 1.0 }}
+        whileTap={{ scale: 0.9 }}
+        className="fixed bottom-10 right-10 h-16 w-16 bg-[#177E8C] rounded-full flex justify-center items-center text-white">
+        <span className="text-white text-2xl">
+          <HiChatBubbleLeftRight className="text-3xl" />
+        </span>
+      </motion.button>
     </div>
   );
 };

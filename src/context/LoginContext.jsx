@@ -56,7 +56,7 @@ function LoginProvider({ children }) {
     navigate('/login');
   };
   const redirectIn = (hash = '') => {
-    navigate(`/${hash}`);
+    navigate('/hrms');
   };
 
   const handleLogin = useCallback(async (data) => {
@@ -66,7 +66,7 @@ function LoginProvider({ children }) {
 
       resp = await post(API_AUTH, data);
       if ([200].includes(resp.status)) {
-        navigate('/');
+        navigate('/hrms');
         let { token, user, image } = resp.data;
         console.log(resp.data);
         document.cookie = `${TOKEN_KEY}=${token}`;
