@@ -21,19 +21,16 @@ const initialState = {
   isLoading: false,
   isLoggedIn: false
 };
-const parseJwt = (token) => {
-  try {
-    return JSON.parse(atob(token.split('.')[1]));
-  } catch (e) {
-    return null;
-  }
-};
 
 function reducer(state, action) {
   const { type } = action;
   switch (type) {
     case 'LOGGING_IN':
       return { ...state, isLoading: true };
+    case 'LOGGING_OUT':
+      return { ...state, isLoading: true };
+    case 'LOGGED_OUT':
+      return { ...state, isLoading: false, isLoggedIn: false };
     case 'LOGGED_IN':
       return { ...state, isLoading: false };
     case 'ERROR':
@@ -45,23 +42,30 @@ function reducer(state, action) {
 }
 
 function LoginProvider({ children }) {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
   const [userName, setUserName] = useState(localStorage.getItem('user'));
   const [userImg, setUserImg] = useState(localStorage.getItem('user_img'));
-
-  const cookies = new Cookies();
   const [state, dispatch] = useReducer(reducer, initialState);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
+  const [expiry, setExpiry] = useState(null);
 
   const handleLogout = () => {
-    cookies.remove('jwt_authorization');
-    setUser(null);
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('user');
-    localStorage.removeItem('user_img');
-    navigate('/login');
+    dispatch({ type: 'LOGGING_OUT' });
+    try {
+      cookies.remove(`${TOKEN_KEY}_test`);
+      setUser(null);
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('user');
+      localStorage.removeItem('user_img');
+      navigate('/login');
+      dispatch({ type: 'LOGGED_OUT' });
+    } catch (e) {
+      toast.error(`OOPS THERE'S AN ISSUE`);
+      dispatch({ type: 'ERROR' });
+    }
   };
-  const redirectIn = (hash = '') => {
+  const redirectIn = () => {
     navigate('/hrms');
   };
 
@@ -73,11 +77,11 @@ function LoginProvider({ children }) {
       resp = await post(API_AUTH, data);
       if ([200].includes(resp.status)) {
         let { token, user, image } = resp.data;
-
+        redirectIn();
         const decoded = jwt(token);
         setUser(decoded);
 
-        cookies.set('jwt_authorization', token, {
+        cookies.set(`${TOKEN_KEY}_test`, token, {
           expires: new Date(decoded.exp * 1000)
         });
 
@@ -89,7 +93,7 @@ function LoginProvider({ children }) {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('user', user);
         localStorage.setItem('user_img', image);
-        redirectIn();
+
         dispatch({ type: 'LOGGED_IN' });
       } else {
         dispatch({
@@ -105,22 +109,29 @@ function LoginProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const cookie = cookies.get('jwt_authorization');
+    const cookie = cookies.get(`${TOKEN_KEY}_test`);
 
     if (cookie) {
       const decoded = jwt(cookie);
-
+      setExpiry(new Date(decoded.exp * 1000));
       if (new Date() <= new Date(decoded.exp * 1000)) {
         setUser(decoded);
-        setUserName(localStorage.getItem('user'));
-        setUserImg(localStorage.getItem('user_img'));
+
+        redirectIn();
       } else {
         handleLogout();
+        return;
       }
     } else {
       handleLogout();
+      return;
     }
   }, []);
+
+  useEffect(() => {
+    setUserName(localStorage.getItem('user'));
+    setUserImg(localStorage.getItem('user_img'));
+  }, [user]);
 
   return (
     <LoginContext.Provider
