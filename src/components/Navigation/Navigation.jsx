@@ -16,12 +16,14 @@ const Navigation = () => {
   const [userImg, setUserImg] = useState(null);
 
   useEffect(() => {
-    console.log('hello');
-    const usertmp = localStorage.getItem('user');
-    const userimg = localStorage.getItem('user_img');
-    setUser(usertmp);
-    setUserImg(userimg);
-  }, [isAuthenticated]);
+    if (isAuthenticated()) {
+      console.log('hello');
+      const usertmp = localStorage.getItem('user');
+      const userimg = localStorage.getItem('user_img');
+      setUser(usertmp);
+      setUserImg(userimg);
+    }
+  }, []);
 
   return (
     <nav className="font-custom bg-[#66A7A3] px-10 py-4 ">

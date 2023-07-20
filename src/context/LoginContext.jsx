@@ -53,6 +53,9 @@ function LoginProvider({ children }) {
   const handleLogout = () => {
     clearCookies();
     setExpiry(null);
+    localStorage.setItem('isLoggedIn');
+    localStorage.setItem('user');
+    localStorage.setItem('user_img');
     navigate('/login');
   };
   const redirectIn = (hash = '') => {
@@ -97,7 +100,7 @@ function LoginProvider({ children }) {
     let isValid = false;
     let expiry = null;
     let role = null;
-
+    console.log('validateLogin>>data', data);
     if (data) {
       expiry = new Date(new Date(data.exp * 1000));
 
@@ -107,13 +110,13 @@ function LoginProvider({ children }) {
         setExpiry(expiry);
       }
     }
-
+    console.log('validateLogin>>{ isValid, role }', { isValid, role });
     return { isValid, role };
   }, [cookie]);
 
   useEffect(() => {
     const { isValid } = validateLogin();
-
+    console.log('useEffect>>isValid', isValid);
     if (!isValid) {
       handleLogout();
       return;
@@ -123,7 +126,9 @@ function LoginProvider({ children }) {
   }, [cookie]);
   const isAuthenticated = useCallback(
     (expiryDate = expiryToken) => {
+      console.log('isAuth', expiryToken);
       const isValid = new Date() <= expiryDate;
+      console.log('isAuth>>isValid', isValid);
       return isValid;
     },
     [expiryToken]
