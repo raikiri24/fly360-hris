@@ -129,8 +129,6 @@ function LoginProvider({ children }) {
       const decoded = jwt(cookie);
       if (new Date() <= new Date(decoded.exp * 1000)) {
         setUser(decoded);
-
-        redirectIn();
       } else {
         handleLogout();
         return;
