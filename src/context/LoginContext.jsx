@@ -124,7 +124,7 @@ function LoginProvider({ children }) {
 
   useEffect(() => {
     const cookie = cookies.get(`${TOKEN_KEY}_test`);
-
+    console.log('check cookie', cookie);
     if (cookie) {
       const decoded = jwt(cookie);
       if (new Date() <= new Date(decoded.exp * 1000)) {
