@@ -81,7 +81,7 @@ function LoginProvider({ children }) {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('user', user);
         localStorage.setItem('user_img', image);
-
+        redirectIn();
         dispatch({ type: 'LOGGED_IN' });
       } else {
         dispatch({
@@ -111,24 +111,23 @@ function LoginProvider({ children }) {
       }
     }
     console.log('validateLogin>>{ isValid, role }', { isValid, role });
-    return { isValid, role };
+    return { isValid, role, expiry };
   }, [cookie]);
 
   useEffect(() => {
-    const { isValid } = validateLogin();
-    console.log('useEffect>>isValid', isValid);
-    if (!isValid) {
+    const { isValid, expiry } = validateLogin();
+
+    if (isValid) {
+      setExpiry(expiry);
+    } else {
       handleLogout();
       return;
-    } else {
-      redirectIn();
     }
   }, [cookie]);
   const isAuthenticated = useCallback(
     (expiryDate = expiryToken) => {
-      console.log('isAuth', expiryToken);
       const isValid = new Date() <= expiryDate;
-      console.log('isAuth>>isValid', isValid);
+
       return isValid;
     },
     [expiryToken]

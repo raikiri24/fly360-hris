@@ -16,13 +16,11 @@ const Navigation = () => {
   const [userImg, setUserImg] = useState(null);
 
   useEffect(() => {
-    if (isAuthenticated()) {
-      console.log('hello');
-      const usertmp = localStorage.getItem('user');
-      const userimg = localStorage.getItem('user_img');
-      setUser(usertmp);
-      setUserImg(userimg);
-    }
+    const usertmp = localStorage.getItem('user');
+    const userimg = localStorage.getItem('user_img');
+    setUser(usertmp);
+    setUserImg(userimg);
+    console.log('..');
   }, []);
 
   return (
