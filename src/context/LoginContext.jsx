@@ -135,9 +135,6 @@ function LoginProvider({ children }) {
         handleLogout();
         return;
       }
-    } else {
-      handleLogout();
-      return;
     }
   }, []);
 
