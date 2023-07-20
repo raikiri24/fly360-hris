@@ -47,7 +47,7 @@ function reducer(state, action) {
 function LoginProvider({ children }) {
   const [cookie, setCookie] = useState(getCookie(TOKEN_KEY));
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [expiry, setExpiry] = useState(null);
+  const [expiryToken, setExpiry] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -66,9 +66,8 @@ function LoginProvider({ children }) {
 
       resp = await post(API_AUTH, data);
       if ([200].includes(resp.status)) {
-        navigate('/hrms');
         let { token, user, image } = resp.data;
-        console.log(resp.data);
+
         document.cookie = `${TOKEN_KEY}=${token}`;
         setCookie(token);
         toast.success(
@@ -123,11 +122,11 @@ function LoginProvider({ children }) {
     }
   }, [cookie]);
   const isAuthenticated = useCallback(
-    (expiryDate = expiry) => {
+    (expiryDate = expiryToken) => {
       const isValid = new Date() <= expiryDate;
       return isValid;
     },
-    [expiry]
+    [expiryToken]
   );
 
   return (
