@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = () => {
   const [dropdownIsOpen, setDropdownIsOpen] = useState(false);
-  const { user, userName, userImg } = useLogin();
+  const { isAuthenticated, userName, userImg } = useLogin();
 
   return (
     <nav className="font-custom bg-[#66A7A3] px-10 py-4 ">
@@ -20,7 +20,7 @@ const Navigation = () => {
           <img src={Logo} alt="" className="h-12" />
         </div>
 
-        {user && (
+        {isAuthenticated() && (
           <div className="flex gap-10 items-center justify-center">
             <motion.button
               whileHover={{ scale: 1.0 }}
@@ -53,7 +53,7 @@ const Navigation = () => {
           </div>
         )}
 
-        {!user && (
+        {!isAuthenticated() && (
           <Link to="/login" className="text-white">
             Login
           </Link>

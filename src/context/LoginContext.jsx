@@ -48,7 +48,6 @@ function LoginProvider({ children }) {
   const [userImg, setUserImg] = useState(localStorage.getItem('user_img'));
   const [state, dispatch] = useReducer(reducer, initialState);
   const [user, setUser] = useState(null);
-  const [expiry, setExpiry] = useState(null);
 
   const handleLogout = () => {
     dispatch({ type: 'LOGGING_OUT' });
@@ -108,12 +107,26 @@ function LoginProvider({ children }) {
     }
   }, []);
 
+  const isAuthenticated = () => {
+    const cookie = cookies.get(`${TOKEN_KEY}_test`);
+
+    if (cookie) {
+      const decoded = jwt(cookie);
+      if (new Date() <= new Date(decoded.exp * 1000)) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
     const cookie = cookies.get(`${TOKEN_KEY}_test`);
 
     if (cookie) {
       const decoded = jwt(cookie);
-      setExpiry(new Date(decoded.exp * 1000));
       if (new Date() <= new Date(decoded.exp * 1000)) {
         setUser(decoded);
 
@@ -140,7 +153,7 @@ function LoginProvider({ children }) {
         dispatch,
         handleLogin,
         handleLogout,
-        user,
+        isAuthenticated,
         userName,
         userImg
       }}>
