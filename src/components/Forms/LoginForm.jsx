@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, ButtonToolbar, Button, Input, Checkbox } from 'rsuite';
 import { useForm, Controller } from 'react-hook-form';
 import { useLogin } from '../../context/LoginContext';
-import { BeatLoader } from 'react-spinners';
+import { MoonLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
 
 const LoginForm = () => {
@@ -27,9 +27,9 @@ const LoginForm = () => {
   return (
     <>
       {isLoading && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
-          <BeatLoader
-            className="text-gray-800"
+        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-[#01413c] opacity-20 flex flex-col items-center justify-center">
+          <MoonLoader
+            color="white"
             loading={isLoading}
             size={50}
             aria-label="Loading Spinner"

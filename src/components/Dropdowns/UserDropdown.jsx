@@ -5,7 +5,6 @@ import { VscSettings } from 'react-icons/vsc';
 import { HiKey } from 'react-icons/hi';
 import { HiOutlineMoon } from 'react-icons/hi';
 import { motion } from 'framer-motion';
-import { useLogin } from '../../context/LoginContext';
 import { RxAvatar } from 'react-icons/rx';
 import { Tooltip, Whisper } from 'rsuite';
 
@@ -24,7 +23,7 @@ const TooltipComponent = () => (
   </Whisper>
 );
 
-const UserDropdown = () => {
+const UserDropdown = ({ useLogin, user, userImg }) => {
   const [accountsIsOpen, setAccountsIsOpen] = useState(false);
   const [activeAccount, setActiveAccount] = useState(true);
 
@@ -35,8 +34,9 @@ const UserDropdown = () => {
         <li className="px-2 " onClick={() => setAccountsIsOpen(!accountsIsOpen)}>
           <div className=" px-2 py-5 rounded-md bg-[#177E8C] grid grid-cols-5 gap-2 justify-center items-center cursor-pointer bg-opacity-30">
             <span className="col-span-4 text-white flex items-center gap-2">
-              <RxAvatar className="text-2xl" />
-              Paul Leandro Lanot
+              {!userImg && <RxAvatar className="text-2xl" />}
+              {userImg && <img src={userImg} className="w-8 h-8 rounded-full" />}
+              {user}
             </span>
             <TooltipComponent />
           </div>

@@ -1,4 +1,11 @@
-import React, { createContext, useReducer, useContext, useCallback, useEffect } from 'react';
+import React, {
+  createContext,
+  useReducer,
+  useContext,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import post from '../api/post';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -38,12 +45,14 @@ function reducer(state, action) {
 }
 
 function LoginProvider({ children }) {
-  const cookie = getCookie(TOKEN_KEY);
+  const [cookie, setCookie] = useState(getCookie(TOKEN_KEY));
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [expiry, setExpiry] = useState(null);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     clearCookies();
+    setExpiry(null);
     navigate('/login');
   };
   const redirectIn = (hash = '') => {
@@ -58,14 +67,19 @@ function LoginProvider({ children }) {
       resp = await post(API_AUTH, data);
       if ([200].includes(resp.status)) {
         navigate('/');
-        let { token } = resp.data;
+        let { token, user, image } = resp.data;
+        console.log(resp.data);
         document.cookie = `${TOKEN_KEY}=${token}`;
+        setCookie(token);
         toast.success(
           <p>
-            Welcome <b>System Admin!</b>
+            Welcome <b>{user}!</b>
           </p>
         );
         localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('user', user);
+        localStorage.setItem('user_img', image);
+
         dispatch({ type: 'LOGGED_IN' });
       } else {
         dispatch({
@@ -91,6 +105,7 @@ function LoginProvider({ children }) {
       if (new Date() <= expiry) {
         isValid = true;
         role = data?.role;
+        setExpiry(expiry);
       }
     }
 
@@ -106,7 +121,14 @@ function LoginProvider({ children }) {
     } else {
       redirectIn();
     }
-  }, []);
+  }, [cookie]);
+  const isAuthenticated = useCallback(
+    (expiryDate = expiry) => {
+      const isValid = new Date() <= expiryDate;
+      return isValid;
+    },
+    [expiry]
+  );
 
   return (
     <LoginContext.Provider
@@ -114,7 +136,8 @@ function LoginProvider({ children }) {
         ...state,
         dispatch,
         handleLogin,
-        handleLogout
+        handleLogout,
+        isAuthenticated
       }}>
       <Toaster />
       {children}
