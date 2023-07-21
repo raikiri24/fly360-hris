@@ -10,12 +10,15 @@ import ReloadOnBack from './components/ReloadOnBack/ReloadOnBack';
 function App() {
   return (
     <div className="App ">
-      <Routes>
-        <Route path="/" element={<HRISPage />} />
-        <Route path="/hrms" element={<HRISPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
+      <LoginProvider>
+        <ReloadOnBack />
+        <Routes>
+          <Route path="/" element={<HRISPage />} />
+          <Route path="/hrms" element={<HRISPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </LoginProvider>
     </div>
   );
 }
