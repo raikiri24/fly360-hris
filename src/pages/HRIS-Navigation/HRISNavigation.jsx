@@ -2,6 +2,7 @@ import React from 'react';
 import { BsShieldLockFill } from 'react-icons/bs';
 import { Tooltip, Whisper } from 'rsuite';
 import { motion } from 'framer-motion';
+
 import './index.css';
 
 const TooltipComponent = ({ title, isLocked, bg }) => (
