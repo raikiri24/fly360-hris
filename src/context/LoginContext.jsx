@@ -52,6 +52,7 @@ function LoginProvider({ children }) {
   const handleLogout = () => {
     dispatch({ type: 'LOGGING_OUT' });
     try {
+      sessionStorage.removeItem('userInfo');
       cookies.remove(`${TOKEN_KEY}_test`);
       setUser(null);
       localStorage.removeItem('isLoggedIn');
@@ -76,7 +77,8 @@ function LoginProvider({ children }) {
       resp = await post(API_AUTH, data);
       if ([200].includes(resp.status)) {
         let { token, user, image } = resp.data;
-        redirectIn();
+        sessionStorage.setItem('userInfo', JSON.stringify(resp.data));
+
         const decoded = jwt(token);
         setUser(decoded);
 
@@ -92,7 +94,7 @@ function LoginProvider({ children }) {
         localStorage.setItem('isLoggedIn', true);
         localStorage.setItem('user', user);
         localStorage.setItem('user_img', image);
-
+        redirectIn();
         dispatch({ type: 'LOGGED_IN' });
       } else {
         dispatch({
@@ -108,33 +110,18 @@ function LoginProvider({ children }) {
   }, []);
 
   const isAuthenticated = () => {
-    const cookie = cookies.get(`${TOKEN_KEY}_test`);
-
-    if (cookie) {
-      const decoded = jwt(cookie);
-      if (new Date() <= new Date(decoded.exp * 1000)) {
-        return true;
-      } else {
-        return false;
+    const user = JSON.parse(sessionStorage.getItem('userInfo'));
+    if (user) {
+      if (user.token) {
+        const decoded = jwt(user.token);
+        if (new Date() <= new Date(decoded.exp * 1000)) {
+          return true;
+        } else {
+          return false;
+        }
       }
-    } else {
-      return false;
     }
   };
-
-  useEffect(() => {
-    const cookie = cookies.get(`${TOKEN_KEY}_test`);
-    console.log('check cookie', cookie);
-    if (cookie) {
-      const decoded = jwt(cookie);
-      if (new Date() <= new Date(decoded.exp * 1000)) {
-        setUser(decoded);
-      } else {
-        handleLogout();
-        return;
-      }
-    }
-  }, []);
 
   useEffect(() => {
     setUserName(localStorage.getItem('user'));
