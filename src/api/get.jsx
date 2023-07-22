@@ -5,7 +5,7 @@ const get = async (path = '/', submittedPayload = {}, token = null, id = null) =
   try {
     let url = `${import.meta.env.VITE_API_ENDPOINT}${path}`;
     const params = {
-      headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' }
     };
 
     if (token !== null) {
