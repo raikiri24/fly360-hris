@@ -52,7 +52,7 @@ function LoginProvider({ children }) {
   const handleLogout = () => {
     dispatch({ type: 'LOGGING_OUT' });
     try {
-      sessionStorage.removeItem('userInfo');
+      localStorage.removeItem('userInfo');
       cookies.remove(`${TOKEN_KEY}_test`);
       setUser(null);
       localStorage.removeItem('isLoggedIn');
@@ -77,7 +77,7 @@ function LoginProvider({ children }) {
       resp = await post(API_AUTH, data);
       if ([200].includes(resp.status)) {
         let { token, user, image } = resp.data;
-        sessionStorage.setItem('userInfo', JSON.stringify(resp.data));
+        localStorage.setItem('userInfo', JSON.stringify(resp.data));
 
         const decoded = jwt(token);
         setUser(decoded);
@@ -104,13 +104,13 @@ function LoginProvider({ children }) {
         toast.error('Username and password does not match!');
       }
     } catch (err) {
-      toast.error(`${err} Username and password does not match!`);
+      toast.error(`Username and password does not match!`);
       dispatch({ type: 'ERROR' });
     }
   }, []);
 
   const isAuthenticated = () => {
-    const user = JSON.parse(sessionStorage.getItem('userInfo'));
+    const user = JSON.parse(localStorage.getItem('userInfo'));
     if (user) {
       if (user.token) {
         const decoded = jwt(user.token);
