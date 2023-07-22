@@ -2,21 +2,22 @@ import { React } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HRISPage from './pages/HRIS-Navigation/';
 import 'rsuite/dist/rsuite-no-reset.min.css';
-import Login from './pages/Login/Login';
+import LoginPage from './pages/Login/';
 import NotFoundPage from './pages/NotFound';
 import { LoginProvider } from './context/LoginContext';
-import ReloadOnBack from './components/ReloadOnBack/ReloadOnBack';
+import ChangePassword from './pages/ChangePassword';
+import LandingPage from './pages/LandingPage/';
 
 function App() {
   return (
     <div className="App ">
       <LoginProvider>
-        <ReloadOnBack />
         <Routes>
-          <Route path="/" element={<HRISPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/hrms" element={<HRISPage />} />
           <Route path="*" element={<NotFoundPage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/forgot-password" element={<ChangePassword />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </LoginProvider>
     </div>

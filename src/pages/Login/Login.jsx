@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Logo1 from '../../assets/nav-icon-home.svg';
 import LoginForm from '../../components/Forms/LoginForm';
 import { HiChatBubbleLeftRight } from 'react-icons/hi2';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -25,9 +26,9 @@ const Login = () => {
           <div className="flex items-center justify-between mt-4">
             <div className="flex items-center gap-2"></div>
             <div className="flex-grow"></div>
-            <a href="/" className="text-red-600 text-sm">
+            <Link to="/forgot-password" className="text-red-600 text-sm">
               Forgot Password?
-            </a>
+            </Link>
           </div>
         </div>
         <div className="bg-[#66A7A3] w-1/2 flex justify-center items-center max-lg:hidden">

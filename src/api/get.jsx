@@ -1,50 +1,41 @@
-import axios from "axios";
+import axios from 'axios';
 
-const get = async (
-  path = "/",
-  submittedPayload = {},
-  token = null,
-  id = null
-) => {
+const get = async (path = '/', submittedPayload = {}, token = null, id = null) => {
   let data = {};
   try {
     let url = `${import.meta.env.VITE_API_ENDPOINT}${path}`;
     const params = {
-      headers: {},
+      headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
     };
 
     if (token !== null) {
       params.headers = {
         ...params.headers,
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`
       };
     }
 
     if (id !== null) {
       params.headers = {
         ...params.headers,
-        "x-user-id": id,
+        'x-user-id': id
       };
     }
 
     const { as_is = false, ...payload } = submittedPayload;
 
     if (Object.keys(payload).length > 0) {
-      let connector = "?";
-      if (url.includes("?")) {
-        connector = "&";
+      let connector = '?';
+      if (url.includes('?')) {
+        connector = '&';
       }
       Object.keys(payload).forEach((item) => {
         if (as_is) {
-          url = `${url}${connector}${item}=${encodeURIComponent(
-            payload[item]
-          )}`;
+          url = `${url}${connector}${item}=${encodeURIComponent(payload[item])}`;
         } else {
-          url = `${url}${connector}${item}=${encodeURIComponent(
-            JSON.stringify(payload[item])
-          )}`;
+          url = `${url}${connector}${item}=${encodeURIComponent(JSON.stringify(payload[item]))}`;
         }
-        connector = "&";
+        connector = '&';
       });
     }
 

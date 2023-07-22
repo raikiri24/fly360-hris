@@ -47,20 +47,20 @@ const UserDropdown = ({ useLogin, user, userImg }) => {
               className={
                 activeAccount
                   ? 'bg-slate-700 text-white px-5 py-2 hover:bg-[#177E8C] hover:bg-opacity-20 flex  items-center gap-2 text-xs cursor-pointer '
-                  : 'px-5 py-2 hover:bg-gray-400 hover:text-white flex ml-5 items-center gap-2 text-xs cursor-pointer '
+                  : 'px-5 py-2 hover:bg-[#177E8C] text-white  flex ml-5 items-center gap-2 text-xs cursor-pointer '
               }>
               <span>
                 <RxAvatar />
               </span>
               Super Admin Mode
             </li>
-            <li className="px-5 py-2 hover:bg-gray-400 hover:text-white flex  items-center gap-2 text-xs cursor-pointer">
+            <li className="px-5 py-2 hover:bg-[#177E8C] text-white hover:bg-opacity-20  flex  items-center gap-2 text-xs cursor-pointer">
               <span>
                 <RxAvatar />
               </span>
               Admin Mode
             </li>
-            <li className="px-5 py-2 hover:bg-gray-400 hover:text-white flex items-center gap-2 text-xs cursor-pointer">
+            <li className="px-5 py-2 hover:bg-[#177E8C]  text-white hover:bg-opacity-20 flex items-center gap-2 text-xs cursor-pointer">
               <span>
                 <RxAvatar />
               </span>
