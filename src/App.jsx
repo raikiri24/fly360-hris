@@ -6,13 +6,14 @@ import LoginPage from './pages/Login/';
 import NotFoundPage from './pages/NotFound';
 import { LoginProvider } from './context/LoginContext';
 import ChangePassword from './pages/ChangePassword';
+import LandingPage from './pages/LandingPage/';
 
 function App() {
   return (
     <div className="App ">
       <LoginProvider>
         <Routes>
-          <Route path="/" element={<HRISPage />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/hrms" element={<HRISPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="/forgot-password" element={<ChangePassword />} />

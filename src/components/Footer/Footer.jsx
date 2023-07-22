@@ -10,11 +10,11 @@ const Footer = () => {
   return (
     <div className="bg-[#088585] mt-10 text-white p-10 ">
       <div>
-        <div className="flex gap-10">
+        <div className="flex gap-10 ">
           <img src={Logo} alt="" className=" h-40" />
           <div className="flex flex-col">
-            <div className="grid grid-cols-3 gap-24">
-              <div className="flex justify-center items-center gap-5">
+            <div className="grid grid-cols-12 gap-24 max-2xl:gap-2 ">
+              <div className="flex justify-center items-center gap-5 col-span-6">
                 <span>Stay Connected</span>
                 <div>
                   <input
@@ -27,7 +27,7 @@ const Footer = () => {
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="col-span-3">
                 <span>Web Development</span>
                 <ul className="ml-20">
                   <li>
@@ -38,7 +38,7 @@ const Footer = () => {
                   <li>API Integration</li>
                 </ul>
               </div>
-              <div>
+              <div className="col-span-3">
                 <span>Projects</span>
                 <ul className="ml-20">
                   <li>Document Tracking System</li>
