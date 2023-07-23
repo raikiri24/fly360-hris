@@ -19,7 +19,7 @@ const Login = () => {
             alt="Large Logo"
             className="w-24 h-24 rounded-lg mb-6 max-lg:bg-[#66A7A3] p-2 shadow-lg hidden max-lg:block"
           />
-          <h1 className="text-black uppercase drop-shadow-3xl sm:text-4xl text-2xl  mb-2">
+          <h1 className="text-black uppercase drop-shadow-3xl sm:text-4xl text-2xl font-bold mb-2">
             Welcome Back
           </h1>
           <p className="text-gray-500  mb-6">Hello, please enter your credentials!</p>
