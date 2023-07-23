@@ -57,7 +57,7 @@ const LoginForm = () => {
             name="username"
           />
 
-          <Form.HelpText tooltip>Username or Email is Required</Form.HelpText>
+          <Form.HelpText className="ml-2">Username or Email is Required</Form.HelpText>
         </Form.Group>
         <Form.Group controlId="password" name="password">
           <Form.ControlLabel>Password</Form.ControlLabel>

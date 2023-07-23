@@ -32,7 +32,7 @@ const Login = () => {
         </div>
         <div className="bg-[#66A7A3] w-1/2 flex justify-center items-center max-lg:hidden">
           <a href="/">
-            <img src={Logo1} alt="Large Logo" className="w-96 h-96" />
+            <img src={Logo1} alt="Large Logo" className="object-fill w-96" />
           </a>
         </div>
       </div>
