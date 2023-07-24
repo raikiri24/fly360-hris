@@ -55,5 +55,3 @@ E --> B
 D --> G[PASSED]
 
 G --> H[Main Branch / Deployed]
-
-Hello

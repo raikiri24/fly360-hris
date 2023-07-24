@@ -57,7 +57,7 @@ const LoginForm = () => {
             name="username"
           />
 
-          <Form.HelpText tooltip>Username or Email is Required</Form.HelpText>
+          <Form.HelpText className="ml-2">Username or Email is Required</Form.HelpText>
         </Form.Group>
         <Form.Group controlId="password" name="password">
           <Form.ControlLabel>Password</Form.ControlLabel>
@@ -80,11 +80,24 @@ const LoginForm = () => {
             name="password"
           />
         </Form.Group>
-        <Form.Group>
-          <Checkbox name="remember" className="text-sm">
-            Remember Me
-          </Checkbox>
-        </Form.Group>
+
+        <div className="flex justify-between items-center mb-4">
+          <div className="text-sm">
+            <Form.Group>
+              <Checkbox name="remember">
+                <span className="ml-2">Remember Me</span>
+              </Checkbox>
+            </Form.Group>
+          </div>
+          <div className="text-sm">
+            <Form.Group>
+              <a href="/" className="text-red-600">
+                Forgot Password?
+              </a>
+            </Form.Group>
+          </div>
+        </div>
+
         <Form.Group>
           <ButtonToolbar>
             <Button
@@ -95,6 +108,19 @@ const LoginForm = () => {
               block
               className="bg-teal-500 hover:bg-blue-700 text-white">
               Sign In
+            </Button>
+          </ButtonToolbar>
+        </Form.Group>
+        <Form.Group>
+          <ButtonToolbar>
+            <Button
+              loading={isLoading}
+              disabled={isLoading}
+              type="submit"
+              appearance="primary"
+              block
+              className="bg-teal-500 hover:bg-blue-700 text-white">
+              Web Bundy
             </Button>
           </ButtonToolbar>
         </Form.Group>
