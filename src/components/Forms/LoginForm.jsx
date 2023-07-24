@@ -89,13 +89,6 @@ const LoginForm = () => {
               </Checkbox>
             </Form.Group>
           </div>
-          <div className="text-sm">
-            <Form.Group>
-              <a href="/" className="text-red-600">
-                Forgot Password?
-              </a>
-            </Form.Group>
-          </div>
         </div>
 
         <Form.Group>
