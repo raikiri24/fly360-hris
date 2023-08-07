@@ -4,6 +4,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useChangePassword } from '../../context/ForgotPasswordContext';
 import { MoonLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
+import Logo1 from '../../assets/nav-icon-home.svg';
 
 const ForgotPasswordForm = () => {
   const {
@@ -26,8 +27,7 @@ const ForgotPasswordForm = () => {
     if (!isOtpSent) {
       if (!data.email) {
         toast.error('Email is required!');
-      }
-      if (data.email) {
+      } else {
         handleSendOtp(data);
       }
     } else {
@@ -72,10 +72,34 @@ const ForgotPasswordForm = () => {
           />
         </div>
       )}
-      <div className="flex flex-col justify-center items-center h-screen">
+      <nav className="relative flex w-full flex-wrap items-center justify-between bg-neutral-100 py-2 text-neutral-500 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-teal-500 lg:py-4">
+        <div className="flex w-full flex-wrap items-center justify-between px-3">
+          <div>
+            <a
+              className="mx-2 my-1 flex items-center text-neutral-900 hover:text-neutral-900 focus:text-neutral-900 lg:mb-0 lg:mt-0"
+              href="#">
+              <img
+                src={Logo1}
+                alt="Logo"
+                className="w-10 h-10  top-4 left-4 rounded-lg bg-[#66A7A3] p-2 shadow-lg hidden lg:block"
+              />
+            </a>
+          </div>
+        </div>
+      </nav>
+      <div
+        className="flex flex-col justify-center items-center h-screen bg-[#66A7A3] bg-cover bg-no-repeat bg-center "
+        style={{
+          backgroundImage: `url('src/assets/FPLogo.png')`,
+          backgroundColor: `rgba(102, 167, 163, 0.55)`
+        }}>
         {!isOtpVerified && (
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <div className="justify-center flex items-center gap-3">
+            <div className="flex flex-col justify-center items-center h-96 max-w-lg  bg-gray-300 bg-opacity-90 p-4 rounded-lg shadow-lg">
+              <h1 className=" text-3xl font-bold text-slate-900 mb-2">Trouble logging in?</h1>
+              <p className="text-lg text-slate-900 mb-10">
+                No worries! We'll send you reset instructions
+              </p>
               <Form.Group controlId="email" name="email">
                 <Form.ControlLabel>Email</Form.ControlLabel>
                 <Controller
@@ -112,9 +136,11 @@ const ForgotPasswordForm = () => {
               </Form.Group>
             </div>
             {isOtpSent && (
-              <div className="flex flex-col">
+              <div className="flex flex-col justify-center items-center h-48 max-w-lg  bg-gray-200 bg-opacity-90 p-4 rounded-lg shadow-lg">
                 <Form.Group controlId="otp" name="otp">
-                  <Form.ControlLabel>OTP</Form.ControlLabel>
+                  <Form.ControlLabel className="text-3xl  text-center text-slate-900 mb-2">
+                    OTP
+                  </Form.ControlLabel>
                   <Controller
                     control={control}
                     rules={{
@@ -151,7 +177,8 @@ const ForgotPasswordForm = () => {
         )}
         {isOtpVerified && (
           <Form onSubmit={handleSubmit(newPasswordOnSubmit)}>
-            <div className="justify-center flex items-center gap-3 flex-col">
+            <div className="flex flex-col justify-center items-center h-96 max-w-lg  bg-gray-200 bg-opacity-90 p-4 rounded-lg shadow-lg">
+              <h1 className=" text-3xl font-bold text-slate-900 mb-8">Enter the New Password</h1>
               <Form.Group controlId="password" name="password">
                 <Form.ControlLabel>New Password</Form.ControlLabel>
                 <Controller
