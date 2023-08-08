@@ -95,49 +95,49 @@ const ForgotPasswordForm = () => {
         }}>
         {!isOtpVerified && (
           <Form onSubmit={handleSubmit(onSubmit)}>
-            {
-              !isOtpSent && ( <div className="flex flex-col justify-center items-center h-96 max-w-lg  bg-gray-300 bg-opacity-90 p-4 rounded-lg shadow-lg">
-              <h1 className=" text-3xl font-bold text-slate-900 mb-2">Trouble logging in?</h1>
-              <p className="text-lg text-slate-900 mb-10">
-                No worries! We'll send you reset instructions
-              </p>
-              <Form.Group controlId="email" name="email">
-                <Form.ControlLabel>Email</Form.ControlLabel>
-                <Controller
-                  control={control}
-                  rules={{
-                    required: true
-                  }}
-                  render={({ field: { onChange, onBlur, value } }) => (
-                    <Form.Control
-                      onBlur={onBlur} // notify when input is touched/blur
-                      placeholder="example@gmail.com"
-                      onChange={onChange}
-                      value={value}
-                      type="email"
-                      name="email"
-                    />
-                  )}
-                  name="email"
-                />
-              </Form.Group>
+            {!isOtpSent && (
+              <div className="flex flex-col justify-center items-center h-96 max-w-lg  bg-gray-300 bg-opacity-90 p-4 rounded-lg shadow-lg">
+                <h1 className=" text-3xl font-bold text-slate-900 mb-2">Trouble logging in?</h1>
+                <p className="text-lg text-slate-900 mb-10">
+                  No worries! We'll send you reset instructions
+                </p>
+                <Form.Group controlId="email" name="email">
+                  <Form.ControlLabel>Email</Form.ControlLabel>
+                  <Controller
+                    control={control}
+                    rules={{
+                      required: true
+                    }}
+                    render={({ field: { onChange, onBlur, value } }) => (
+                      <Form.Control
+                        onBlur={onBlur} // notify when input is touched/blur
+                        placeholder="example@gmail.com"
+                        onChange={onChange}
+                        value={value}
+                        type="email"
+                        name="email"
+                      />
+                    )}
+                    name="email"
+                  />
+                </Form.Group>
 
-              <Form.Group>
-                <ButtonToolbar>
-                  <Button
-                    loading={isLoading}
-                    disabled={isLoading}
-                    type="submit"
-                    appearance="primary"
-                    block
-                    className="bg-teal-500 hover:bg-blue-700 text-white">
-                    Send OTP
-                  </Button>
-                </ButtonToolbar>
-              </Form.Group>
-            </div>)
-            }
-           
+                <Form.Group>
+                  <ButtonToolbar>
+                    <Button
+                      loading={isLoading}
+                      disabled={isLoading}
+                      type="submit"
+                      appearance="primary"
+                      block
+                      className="bg-teal-500 hover:bg-blue-700 text-white">
+                      Send OTP
+                    </Button>
+                  </ButtonToolbar>
+                </Form.Group>
+              </div>
+            )}
+
             {isOtpSent && (
               <div className="flex flex-col justify-center items-center h-48 max-w-lg  bg-gray-200 bg-opacity-90 p-4 rounded-lg shadow-lg">
                 <Form.Group controlId="otp" name="otp">
