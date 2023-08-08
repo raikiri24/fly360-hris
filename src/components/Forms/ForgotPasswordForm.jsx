@@ -95,7 +95,8 @@ const ForgotPasswordForm = () => {
         }}>
         {!isOtpVerified && (
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col justify-center items-center h-96 max-w-lg  bg-gray-300 bg-opacity-90 p-4 rounded-lg shadow-lg">
+            {
+              !isOtpSent && ( <div className="flex flex-col justify-center items-center h-96 max-w-lg  bg-gray-300 bg-opacity-90 p-4 rounded-lg shadow-lg">
               <h1 className=" text-3xl font-bold text-slate-900 mb-2">Trouble logging in?</h1>
               <p className="text-lg text-slate-900 mb-10">
                 No worries! We'll send you reset instructions
@@ -134,7 +135,9 @@ const ForgotPasswordForm = () => {
                   </Button>
                 </ButtonToolbar>
               </Form.Group>
-            </div>
+            </div>)
+            }
+           
             {isOtpSent && (
               <div className="flex flex-col justify-center items-center h-48 max-w-lg  bg-gray-200 bg-opacity-90 p-4 rounded-lg shadow-lg">
                 <Form.Group controlId="otp" name="otp">
