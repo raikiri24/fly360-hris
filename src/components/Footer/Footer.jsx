@@ -1,10 +1,9 @@
 import React from 'react';
-import Logo from '../../assets/nav-icon-home.svg';
 import { FaLocationDot } from 'react-icons/fa6';
-import { ImFacebook2 } from 'react-icons/im';
+import { ImFacebook2, ImYoutube2 } from 'react-icons/im';
 import { TiSocialInstagram } from 'react-icons/ti';
-import { ImYoutube2 } from 'react-icons/im';
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/nav-icon-home.svg';
 
 const Footer = () => {
   return (

@@ -4,9 +4,9 @@ import { useForm, Controller } from 'react-hook-form';
 import { useLogin } from '../../context/LoginContext';
 import { MoonLoader } from 'react-spinners';
 import toast from 'react-hot-toast';
-
+import WebBundy from '../WebBundy/WebBundy';
 const LoginForm = () => {
-  const { handleLogin, isLoading } = useLogin();
+  const { handleLogin, isLoading, handleOpenWebBundy, isWebBundyOpen } = useLogin();
 
   const { handleSubmit, control } = useForm({
     defaultValues: { username: '', password: '' },
@@ -109,15 +109,16 @@ const LoginForm = () => {
             <Button
               loading={isLoading}
               disabled={isLoading}
-              type="submit"
               appearance="primary"
               block
-              className="bg-teal-500 hover:bg-blue-700 text-white">
+              className="bg-teal-500 hover:bg-blue-700 text-white"
+              onClick={() => handleOpenWebBundy()}>
               Web Bundy
             </Button>
           </ButtonToolbar>
         </Form.Group>
       </Form>
+      <WebBundy isWebBundyOpen={isWebBundyOpen} />
     </>
   );
 };

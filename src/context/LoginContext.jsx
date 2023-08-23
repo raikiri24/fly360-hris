@@ -19,7 +19,8 @@ const useLogin = () => useContext(LoginContext);
 
 const initialState = {
   isLoading: false,
-  isLoggedIn: false
+  isLoggedIn: false,
+  isWebBundyOpen: false
 };
 
 function reducer(state, action) {
@@ -33,6 +34,14 @@ function reducer(state, action) {
       return { ...state, isLoading: false, isLoggedIn: false };
     case 'LOGGED_IN':
       return { ...state, isLoading: false };
+    case 'OPENING_WEB_BUNDY':
+      return { ...state, isWebBundyOpen: false };
+    case 'OPENED_WEB_BUNDY':
+      return { ...state, isWebBundyOpen: true };
+    case 'CLOSING_WEB_BUNDY':
+      return { ...state, isWebBundyOpen: true };
+    case 'CLOSED_WEB_BUNDY':
+      return { ...state, isWebBundyOpen: false };
     case 'ERROR':
       return { ...state, isLoading: false };
 
@@ -67,6 +76,42 @@ function LoginProvider({ children }) {
   };
   const redirectIn = () => {
     navigate('/hrms');
+  };
+
+  const handleOpenWebBundy = () => {
+    dispatch({ type: 'OPENING_WEB_BUNDY' });
+    try {
+      if (navigator.geolocation) {
+        dispatch({ type: 'OPENED_WEB_BUNDY' });
+      } else {
+        dispatch({
+          type: 'ERROR',
+          errorMsg: 'Something went wrong when opening web bundy'
+        });
+        toast.error('There is a problem with your location!');
+      }
+    } catch (e) {
+      toast.error(`OOPS THERE'S AN ISSUE`);
+      dispatch({ type: 'ERROR' });
+    }
+  };
+
+  const handleCloseWebBundy = () => {
+    dispatch({ type: 'CLOSING_WEB_BUNDY' });
+    try {
+      if (navigator.geolocation) {
+        dispatch({ type: 'CLOSED_WEB_BUNDY' });
+      } else {
+        dispatch({
+          type: 'ERROR',
+          errorMsg: 'Something went wrong when closing web bundy'
+        });
+        toast.error('There is a problem closing your web bundy!');
+      }
+    } catch (e) {
+      toast.error(`OOPS THERE'S AN ISSUE`);
+      dispatch({ type: 'ERROR' });
+    }
   };
 
   const handleLogin = useCallback(async (data) => {
@@ -136,6 +181,8 @@ function LoginProvider({ children }) {
         handleLogin,
         handleLogout,
         isAuthenticated,
+        handleOpenWebBundy,
+        handleCloseWebBundy,
         userName,
         userImg
       }}>
