@@ -14,7 +14,7 @@ const Navigation = () => {
   const { isAuthenticated, userName, userImg } = useLogin();
 
   return (
-    <nav className="font-custom bg-[#66A7A3] px-10 py-4 ">
+    <nav className="font-noir bg-[#66A7A3] px-10 py-4 ">
       <div className="flex justify-between items-center">
         <div className="text-white text-lg">
           <img src={Logo} alt="" className="h-12" />

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
-    <div className="relative font-roboto">
+    <div className="relative font-noir">
       <img
         src={Logo1}
         alt="Logo"

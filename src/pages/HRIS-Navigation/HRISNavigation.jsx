@@ -41,7 +41,7 @@ const TooltipComponent = ({ title, isLocked, bg }) => (
 
 const HRISNavigation = () => {
   return (
-    <div className="mt-20 font-custom select-none">
+    <div className="mt-20 font-noir select-none">
       <div className="grid grid-cols-9 gap-4 px-10">
         <motion.div
           whileHover={{ scale: 1.1 }}

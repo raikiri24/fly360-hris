@@ -4,7 +4,7 @@ import Footer from '../../components/Footer/Footer';
 
 const NotFoundPage = () => {
   return (
-    <div className="font-custom">
+    <div className="font-noir">
       <Navigation />
       <div className="flex flex-col items-center justify-center gap-5 h-96 ">
         <div className="text-7xl self-center">OOPS</div>

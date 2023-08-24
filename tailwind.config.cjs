@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        custom: ['Noir', 'sans-serif']
+        'noir': ['Noir', 'sans-serif'],
+        'righteous': ['Righteous', 'cursive']
       },
       backgroundImage: {
         'r-o': "url('/src/assets/r-o.jpg')",

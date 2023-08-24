@@ -35,11 +35,9 @@ function reducer(state, action) {
     case 'LOGGED_IN':
       return { ...state, isLoading: false };
     case 'OPENING_WEB_BUNDY':
-      return { ...state, isWebBundyOpen: false };
+      return { ...state, isWebBundyOpen: false, isLoading: true };
     case 'OPENED_WEB_BUNDY':
-      return { ...state, isWebBundyOpen: true };
-    case 'CLOSING_WEB_BUNDY':
-      return { ...state, isWebBundyOpen: true };
+      return { ...state, isWebBundyOpen: true, isLoading: false };
     case 'CLOSED_WEB_BUNDY':
       return { ...state, isWebBundyOpen: false };
     case 'ERROR':
@@ -82,13 +80,33 @@ function LoginProvider({ children }) {
     dispatch({ type: 'OPENING_WEB_BUNDY' });
     try {
       if (navigator.geolocation) {
-        dispatch({ type: 'OPENED_WEB_BUNDY' });
-      } else {
-        dispatch({
-          type: 'ERROR',
-          errorMsg: 'Something went wrong when opening web bundy'
+        navigator.permissions.query({ name: 'geolocation' }).then(function (result) {
+          if (result.state === 'granted') {
+          } else if (result.state === 'prompt') {
+            console.log(result.state);
+          } else if (result.state === 'denied') {
+            console.log('DENIED!');
+          }
+          result.onchange = function () {
+            console.log(result.state);
+          };
         });
-        toast.error('There is a problem with your location!');
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            dispatch({ type: 'OPENED_WEB_BUNDY' });
+          },
+          () => {
+            console.log('Unable to retrieve your location');
+            dispatch({
+              type: 'ERROR',
+              errorMsg: 'Something went wrong when opening web bundy'
+            });
+            toast.error('There is a problem with your location!');
+          }
+        );
       }
     } catch (e) {
       toast.error(`OOPS THERE'S AN ISSUE`);
@@ -97,21 +115,7 @@ function LoginProvider({ children }) {
   };
 
   const handleCloseWebBundy = () => {
-    dispatch({ type: 'CLOSING_WEB_BUNDY' });
-    try {
-      if (navigator.geolocation) {
-        dispatch({ type: 'CLOSED_WEB_BUNDY' });
-      } else {
-        dispatch({
-          type: 'ERROR',
-          errorMsg: 'Something went wrong when closing web bundy'
-        });
-        toast.error('There is a problem closing your web bundy!');
-      }
-    } catch (e) {
-      toast.error(`OOPS THERE'S AN ISSUE`);
-      dispatch({ type: 'ERROR' });
-    }
+    dispatch({ type: 'CLOSED_WEB_BUNDY' });
   };
 
   const handleLogin = useCallback(async (data) => {
