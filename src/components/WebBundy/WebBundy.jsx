@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import Modal from 'react-modal';
 import { useLogin } from '../../context/LoginContext';
 import moment from 'moment';

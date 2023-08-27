@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form, ButtonToolbar, Button, Input, Checkbox } from 'rsuite';
 import { useForm, Controller } from 'react-hook-form';
 import { useLogin } from '../../context/LoginContext';
@@ -13,7 +13,7 @@ const LoginForm = () => {
     shouldUseNativeValidation: true
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = useCallback(async (data) => {
     if (!data.password) {
       toast.error('Password is required!');
     }
@@ -23,7 +23,7 @@ const LoginForm = () => {
     if (data.username && data.password) {
       handleLogin(data);
     }
-  };
+  }, []);
   return (
     <>
       {isLoading && (

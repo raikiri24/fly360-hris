@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { Form, ButtonToolbar, Button, Input, Checkbox } from 'rsuite';
 import { useForm, Controller } from 'react-hook-form';
 import { useChangePassword } from '../../context/ForgotPasswordContext';
@@ -23,7 +23,7 @@ const ForgotPasswordForm = () => {
     shouldUseNativeValidation: true
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = useCallback(async (data) => {
     if (!isOtpSent) {
       if (!data.email) {
         toast.error('Email is required!');
@@ -41,7 +41,7 @@ const ForgotPasswordForm = () => {
         handleVerifyOtp(data);
       }
     }
-  };
+  }, []);
 
   const newPasswordOnSubmit = async (data) => {
     data.email = user_email;
